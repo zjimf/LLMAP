@@ -1,35 +1,39 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect, useState } from "react";
+import "./App.css";
 
-function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+interface ChatMessage {
+  id: string;
+  role: "user" | "assistant";
+  text: string;
 }
 
-export default App
+export default function App() {
+  const [messages, setMessages] = useState<ChatMessage[]>([]);
+
+  useEffect(() => {
+    const listener = (msg: { type: string; payload: ChatMessage[] }) => {
+      if (msg.type === "CHAT_MESSAGES") {
+        setMessages(msg.payload);
+      }
+    };
+    chrome.runtime.onMessage.addListener(listener);
+    return () => {
+      chrome.runtime.onMessage.removeListener(listener);
+    };
+  }, []);
+
+  return (
+    <div className="app-container">
+      <h2>Conversation Nodes</h2>
+      <div className="dot-list">
+        {messages.map((m) => (
+          <div
+            key={m.id}
+            className={`dot ${m.role}`}
+            title={`${m.role}: ${m.text}`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
