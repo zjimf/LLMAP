@@ -1,30 +1,14 @@
 {
   "manifest_version": 3,
-  "name": "LLM Node Manager",
-  "version": "0.1.0",
-  "description": "Node-based summary & branch manager for LLM chats",
-  "permissions": ["storage", "activeTab", "scripting"],
+  "name": "LLMAP",
+  "version": "1.0.0",
+  "description": "turns gpt chats into summary nodes for quick scanning, instant search",
+  "permissions": [],
   "host_permissions": ["https://chatgpt.com/*"],
-  "background": {
-    "service_worker": "dist/background/index.js"
-  },
   "content_scripts": [
     {
       "matches": ["https://chatgpt.com/*"],
-      "js": ["dist/content/index.js"]
-    }
-  ],
-  "action": {
-    "default_icon": {
-      "16": "icons/icon.png",
-      "48": "icons/icon.png",
-      "128": "icons/icon.png"
-    }
-  },
-  "web_accessible_resources": [
-    {
-      "resources": ["sidebar/dist/index.html", "sidebar/dist/assets/*"],
-      "matches": ["https://chatgpt.com/*"]
+      "js": ["dist/content-script.js"]
     }
   ]
 }

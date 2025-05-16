@@ -1,15 +1,12 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
+    "target": "ES6",
     "module": "ESNext",
-    "lib": ["DOM", "ESNext"],
+    "lib": ["DOM", "ES6"],
     "outDir": "dist",
-    "rootDir": "src",
     "strict": true,
-    "moduleResolution": "node",
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "types": ["chrome"]
+    "moduleResolution": "Node",
+    "esModuleInterop": true
   },
   "include": ["src"]
 }

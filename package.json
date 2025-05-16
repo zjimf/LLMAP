@@ -15,9 +15,7 @@
   "type": "commonjs",
   "main": "background.js",
   "scripts": {
-    "build:ts": "tsc --project tsconfig.json --outDir dist",
-    "build:sidebar": "cd sidebar && npm run build",
-    "build": "npm run build:ts && npm run build:sidebar"
+    "build": "webpack"
   },
   "devDependencies": {
     "@types/chrome": "^0.0.321",
@@ -27,5 +25,14 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "prettier": "^3.5.3",
     "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "@types/react": "^19.1.4",
+    "@types/react-dom": "^19.1.5",
+    "@vitejs/plugin-react": "^4.4.1",
+    "ts-loader": "^9.5.2",
+    "vite": "^6.3.5",
+    "webpack": "^5.99.8",
+    "webpack-cli": "^6.0.1"
   }
 }
